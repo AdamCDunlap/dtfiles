@@ -1,0 +1,11 @@
+#!/bin/bash
+# Give arguments of dot files to backup
+# This script moves given files to the directory in which this script exists
+#  with the . taken off, then links the original filename to its new place
+for f in "$@"
+do
+    newpos=$(dirname $0)/${f#.}
+    echo "$newpos"
+    #mv ${f} ${newpos}
+    #ln -s ${newpos} ${f}
+done
