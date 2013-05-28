@@ -5,5 +5,5 @@ export CFLAGS="-Wall -Wextra"
 export CXXFLAGS="$CFLAGS -std=c++11"
 export ARDUINO_SKETCHBOOK=~/docs/arduino
 #if [[ $SHLVL == 1 && ! -o LOGIN ]]; then
-#    export PATH=~/bin:$PATH:~/patches/ucpp/ucpp
+#    export PATH=~/bin:$PATH:~/src/ucpp/ucpp
 #fi

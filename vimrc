@@ -7,14 +7,13 @@ filetype plugin on
 "noremap j gj
 "noremap k gk
 set autowrite
-inoremap jj <Esc>
+imap jj <Esc>
 
 autocmd FileType tex noremap <F4> <ESC>:w<CR>:exec "!make verbose=0 -s &>/dev/null &"<CR><CR>
 autocmd FileType tex inoremap <F4> <ESC>:w<CR>:exec "!make verbose=0 -s &>/dev/null &"<CR><CR>a
 autocmd FileType tex,bib setlocal linebreak " Wrap words at spaces
 autocmd FileType tex,bib setlocal display=lastline " Don't show @'s if the last line on screen is long
 autocmd FileType tex,bib setlocal spell " Spellcheck
-autocmd FileType tex,bib source $VIM/vimfiles/plugin/autocorrect.vim
 autocmd FileType tex setlocal tabstop=2
 autocmd FileType tex setlocal shiftwidth=2
 autocmd FileType tex setlocal softtabstop=2
