@@ -6,15 +6,15 @@
 #  and puts it in the home directory. If there's already a file there, it is
 #  renamed with a .old extension and a warning is printed.
 
-
-
 thisdir=$(basename "$PWD")
 while IFS= read -d $'\0' -r file ; do
-    newname=".$(basename ${file})"
+    filename=$(basename ${file})
+    newfile=~/."$filename"
     #printf 'File found: %s New name will be %s \n' "$file" "$newname"
-    if [[ -a ~/$newname ]]; then
-        echo '`~/'"$newname' already exists. Moving to ~/$newname.old"
-        mv -i "~/$newname" "~/$newname.old"
+    if [[ -a $newfile ]]; then
+        echo '`'"$newfile' already exists. Moving to $newfile.old"
+        mv -i "$newfile" "$newfile.old"
     fi
-    ln -s "$thisdir/$file" "~/$newname"
+    echo ln -s "$thisdir/$filename" "$newfile"
+    ln -s "$thisdir/$filename" "$newfile"
 done < <(find . -maxdepth 1 -mindepth 1 ! \( -name ".git" -o -name "etc" -o -name "getdots" -o -name "setdots" \) -print0 )
