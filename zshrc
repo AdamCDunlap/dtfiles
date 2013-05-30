@@ -48,12 +48,6 @@
 ## Not oh-my-zsh stuff:
 
 
-# Customize to your needs...
-# Lines configured by zsh-newuser-install
-HISTFILE=~/.histfile
-HISTSIZE=10000000000000000
-SAVEHIST=10000000000000000
-
 . /etc/os-release
 test -z ANSI_COLOR && ANSI_COLOR='0;36'
 echo -en "\033[$ANSI_COLOR""m"
@@ -67,6 +61,16 @@ echo " /_-'      '-_\                                           "
 echo -en "\033[0m\n"
 
 ls --color=auto
+
+HISTFILE=~/.histfile
+HISTSIZE=10000000000000000
+SAVEHIST=10000000000000000
+set -o INC_APPEND_HISTORY
+set -o EXTENDED_HISTORY
+set -o HIST_IGNORE_DUPS
+set -o HIST_ALLOW_CLOBBER
+# Don't complete any of these unless it's unambiguous
+fignore=(.log .aux .make .d .fls .pdf .temp .bbl .blg)
 
 function newpaper {
     newpaper_tmpnm=$(mktemp)
@@ -100,8 +104,6 @@ function newclass {
     fi
 }
 
-export PATH=~/bin:$PATH:~/src/ucpp/ucpp
-
 alias sctl='sudo systemctl'
 alias netcfg='sudo netcfg'
 alias S='yaourt -S'
@@ -121,7 +123,7 @@ typeset -A abbrevs
 
 # Begin Ugly Hack
 
-alias -g | perl -e "print 'abbrevs=('; while (<>) { s/^(.+?)='(.+)'/'\$1' '\$2' /g; s/'\\$/\\$'/g; print; } print ')';" > /tmp/cheater.zsh
+alias -g | perl -e "print 'abbrevs=('; while (<>) { s/^(.+?)='(.+)'/'\$1' '\$2' /g; s/'\\$/\\$'/g; print; } print ')';" >| /tmp/cheater.zsh
 source /tmp/cheater.zsh
 
 # End Ugly Hack
