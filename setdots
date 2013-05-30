@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# Running this looks at all the files in this directory and makes symlinks to
+#  all of them. The symlinks are of the form ~/.<name> where <name> is the name
+#  of the file in this directory. In words, it adds a dot to the beginning
+#  and puts it in the home directory. If there's already a file there, it is
+#  renamed with a .old extension and a warning is printed.
+
+
+
+thisdir=$(basename "$PWD")
+while IFS= read -d $'\0' -r file ; do
+    newname=".$(basename ${file})"
+    #printf 'File found: %s New name will be %s \n' "$file" "$newname"
+    if [[ -a ~/$newname ]]; then
+        echo '`~/'"$newname' already exists. Moving to ~/$newname.old"
+        mv -i "~/$newname" "~/$newname.old"
+    fi
+    ln -s "$thisdir/$file" "~/$newname"
+done < <(find . -maxdepth 1 -mindepth 1 ! \( -name ".git" -o -name "etc" -o -name "getdots" -o -name "setdots" \) -print0 )
