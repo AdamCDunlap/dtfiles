@@ -5,16 +5,35 @@
 #  of the file in this directory. In words, it adds a dot to the beginning
 #  and puts it in the home directory. If there's already a file there, it is
 #  renamed with a .old extension and a warning is printed.
+# Run this script with arguments of the files to link if it is not desired that
+#  they all be linked. In that case, use the name of the files in this directory
+#  rather than the one with a . in front.
 
 thisdir=$(basename "$PWD")
-while IFS= read -d $'\0' -r file ; do
+
+makesymlink() {
+    file="$1"
     filename=$(basename ${file})
     newfile=~/."$filename"
-    #printf 'File found: %s New name will be %s \n' "$file" "$newname"
     if [[ -a $newfile ]]; then
         echo '`'"$newfile' already exists. Moving to $newfile.old"
-        mv -i "$newfile" "$newfile.old"
+        #mv -i "$newfile" "$newfile.old"
     fi
     echo ln -s "$thisdir/$filename" "$newfile"
-    ln -s "$thisdir/$filename" "$newfile"
-done < <(find . -maxdepth 1 -mindepth 1 ! \( -name ".git" -o -name "etc" -o -name "getdots" -o -name "setdots" \) -print0 )
+    #ln -s "$thisdir/$filename" "$newfile"
+}
+
+if [[ $# == 0 ]] ; then
+    while IFS= read -d $'\0' -r file ; do
+        makesymlink "$file"
+    done < <(find . -maxdepth 1 -mindepth 1 \
+             ! \( -name ".git" -o \
+                  -name "etc" -o \
+                  -name "getdots" -o \
+                  -name "setdots" \) \
+             -print0 )
+else
+    for file; do
+        makesymlink "$file"
+    done
+fi
