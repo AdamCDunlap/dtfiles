@@ -17,10 +17,10 @@ makesymlink() {
     newfile=~/."$filename"
     if [[ -a $newfile ]]; then
         echo '`'"$newfile' already exists. Moving to $newfile.old"
-        #mv -i "$newfile" "$newfile.old"
+        mv -i "$newfile" "$newfile.old"
     fi
-    echo ln -s "$thisdir/$filename" "$newfile"
-    #ln -s "$thisdir/$filename" "$newfile"
+    #echo ln -s "$thisdir/$filename" "$newfile"
+    ln -s "$thisdir/$filename" "$newfile"
 }
 
 if [[ $# == 0 ]] ; then
