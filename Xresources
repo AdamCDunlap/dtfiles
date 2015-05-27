@@ -47,10 +47,13 @@ urxvt*fading: 20
 !urxvt*background: rgba:0000/0000/0200/c800
 
 
-urxvt*urlLauncher: chromium
+urxvt*urlLauncher: browser
 
-urxvt*font: xft:Terminus:Bold:size=15
-urxvt*boldFont: xft:Terminus:Bold:20
+!urxvt*font: 9x15
+urxvt*font: xft:Terminus:Bold:size=12,xft:Code2000:antialias=false
+!urxvt*font: -*-terminus-medium-*-*-*-*-140-*-*-*-*-iso8859-1
+!URxvt*font: "xft:DejaVu Sans Mono:pixelsize=12"
+!urxvt*boldFont: xft:Terminus:Bold:20
 urxvt*scrollBar: false
 urxvt*scrollTtyOutput: false
 urxvt*scrollWithBuffer: true
@@ -82,4 +85,16 @@ urxvt*color15: rgb:fc/fc/fc
 rxvt*print-pipe: "cat > ~/donthitthatbutton"
 urxvt*print-pipe: "cat > ~/donthitthatbutton"
 
-!Xcursor.size:   100
+!! Fonts
+!URxvt.font:tixus
+!
+!! Change fonts on demand
+!URxvt.keysym.M-C-1: command:\033]710;tixus\007\033]711;tixus\007
+!URxvt.keysym.M-C-2: command:\033]710;artsie\007\033]711;artsie\007
+!URxvt.keysym.M-C-3: command:\033]710;lucidasanstypewriter-10\007\033]711;lucidasanstypewriter-10\007
+!URxvt.keysym.M-C-4: command:\033]710;xft:Liberation Mono:style=Regular\007\033]711;xft:Liberation Mono:style=Regular\007
+!URxvt.keysym.M-C-5: command:\033]710;xft:Bitstream Vera Sans Mono:style=Bold\007\033]711;xft:Bitstream Vera Sans Mono:style=Bold\007
+!URxvt.keysym.M-C-6: command:\033]710;12x24\007\033]711;12x24\007
+!URxvt.keysym.M-C-0: command:\033]710;lucidasanstypewriter-24\007\033]711;lucidasanstypewriter-24\007
+!URxvt.font: -*-terminus-medium-*-*-*-*-140-*-*-*-*-iso8859-1
+!URxvt*font:              -*-dina-medium-r-*-*-*-*-*-*-*-*-microsoft-cp1252

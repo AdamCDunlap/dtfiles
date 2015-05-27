@@ -6,5 +6,8 @@
 # Executed by xdm/gdm/kdm at login
 #
 
-/bin/bash --login -i ~/.xinitrc
+touch ~/xsessionran
 
+#( sleep 10; xmodmap ~/.Xmodmap ) &
+
+#bash -l -- ~/.xinitrc
