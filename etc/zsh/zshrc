@@ -1,0 +1,98 @@
+autoload -U colors && colors
+
+PROMPT="%{%(!.$fg_no_bold[red].$fg_bold[green])%}%n@%m%{$reset_color%}  %{$fg_bold[blue]%}%~%(?.. %{$reset_color$fg_no_bold[red]%}[%?])%{$reset_color%}"$'\n'"%# "
+
+autoload -U compinit && compinit
+set -o NOHUP # Don't kill backgrounded processes when the shell exits
+set -o HIST_VERIFY # Verify history before running it
+set -o NOCLOBBER # Don't overwrite files with > unless >| is used
+set -o AUTO_CD
+set -0 CORRECT_ALL
+
+
+### ALIASES ###
+
+# ls aliases
+alias ls='ls --color=auto'
+alias la='ls -A'
+alias ll='ls -lh'
+alias lal='ls -Alh'
+alias l='ls'
+alias s='ls'
+alias sl='ls'
+alias a='la'
+alias sls='ls'
+
+# cd aliases
+alias c='cd'
+alias d='cd'
+alias dc='cd'
+alias u='up'
+alias up='cd ..'
+alias upp='cd ../..'
+alias uppp='cd ../../..'
+alias upppp='cd ../../../..'
+alias uppppp='cd ../../../../..'
+alias upppppp='cd ../../../../../..'
+alias uppppppp='cd ../../../../../../..'
+alias upppppppp='cd ../../../../../../../..'
+alias p='cd ..'
+alias pp='cd ../..'
+alias ppp='cd ../../..'
+alias pppp='cd ../../../..'
+alias ppppp='cd ../../../../..'
+alias pppppp='cd ../../../../../..'
+alias ppppppp='cd ../../../../../../..'
+alias pppppppp='cd ../../../../../../../..'
+
+# default options
+alias grep='grep --color=auto'
+alias egrep='egrep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias rm='rm -I'
+alias cp='cp -ri'
+alias mv='mv -i'
+alias unzip='unzip -q'
+alias df='df -hT'
+
+# shortcuts
+alias vol='alsamixer'
+alias svim='sudoedit'
+alias m='make'
+alias gam='git commit -am'
+alias grepi='grep -i'
+alias g11='g++ -std=gnu++11'
+alias n='netcfg'
+alias v='vim -R'
+alias -g _q='&>/dev/null'
+alias -g _b='&>/dev/null &'
+alias -g  _a='* .[^.]*'
+
+function f {
+    firstarg="$1"
+    shift
+    find -iname "*$firstarg*" "$@"
+}
+function mkdird {
+    mkdir "$@"
+    cd "$@"
+}
+function mvd {
+    mv "$@"
+    cd "$2"
+}
+function vimx {
+    vim "$1"
+    chmod +x "$1"
+}
+case $TERM in 
+*rxvt*|*xterm*)
+    # Set the window title to the current directory when last command finishes
+    precmd()  { print -Pn "\e]0;%m:%~\a" }
+    #chpwd()  { print -Pn "\e]0;%m:%~\a" }
+    # Set the window title to the current directory plus current command when it's about to start
+    preexec() { print -Pn "\e]0;%m:%~ - $1\a" }
+    ;;
+esac
+
+bindkey "^R" history-incremental-search-backward

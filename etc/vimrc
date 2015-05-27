@@ -1,1 +1,53 @@
-/etc/vimrc
+" All system-wide defaults are set in $VIMRUNTIME/archlinux.vim (usually just
+" /usr/share/vim/vimfiles/archlinux.vim) and sourced by the call to :runtime
+" you can find below.  If you wish to change any of those settings, you should
+" do it in this file (/etc/vimrc), since archlinux.vim will be overwritten
+" everytime an upgrade of the vim packages is performed.  It is recommended to
+" make changes after sourcing archlinux.vim since it alters the value of the
+" 'compatible' option.
+
+" This line should not be removed as it ensures that various options are
+" properly set to work with the Vim-related packages.
+runtime! archlinux.vim
+
+" Tabs become spaces
+set tabstop=4
+set shiftwidth=4
+set expandtab
+set softtabstop=4
+
+" Search better
+set ignorecase
+set smartcase
+set incsearch
+
+set mouse=a
+
+set showcmd
+
+syntax enable
+" Map F1 to escape so Alex can use vim
+
+autocmd FileType make setlocal noexpandtab " Don't turn tabs into spaces
+
+set autowrite
+imap jj <Esc>
+
+set relativenumber
+
+" Mark lines that wrap around
+set showbreak=->
+
+"set shortmess+=I
+
+colorscheme slate
+
+map <C-Tab> gt
+map <C-S-Tab> gT
+imap <C-Tab> gt
+imap <C-S-Tab> gT
+
+" Don't let the cursor get to close to top or bottom of page
+set scrolloff=5
+" Completion for command mode commands
+set wildmenu
