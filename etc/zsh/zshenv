@@ -1,2 +1,0 @@
-export PAGER="vimpager"
-export EDITOR="vim"
